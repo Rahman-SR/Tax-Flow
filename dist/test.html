@@ -98,89 +98,35 @@
         },
       }
     </script>
-    <style>
-        :root {
-            --surface-container-lowest: #ffffff;
-            --inverse-primary: #ffb3ac;
-            --on-primary: #ffffff;
-            --on-secondary: #ffffff;
-            --surface-container-highest: #e3e3e3;
-            --on-surface-variant: #534341;
-            --inverse-surface: #313030;
-            --surface-container-low: #f5f5f5;
-            --surface-bright: #fff8f7;
-            --secondary-container: #ffdad6;
-            --on-error-container: #410002;
-            --on-error: #ffffff;
-            --on-background: #231918;
-            --on-primary-container: #410003;
-            --surface-variant: #f4dddb;
-            --surface-container-high: #ebebeb;
-            --primary: #ba1a20;
-            --surface-container: #f0f0f0;
-            --error-container: #ffdad6;
-            --on-secondary-container: #2c1513;
-            --secondary: #775653;
-            --surface-dim: #e4d7d6;
-            --error: #ba1a1a;
-            --outline: #857371;
-            --outline-variant: #d8c2bf;
-            --on-surface: #231918;
-            --inverse-on-surface: #f1efef;
-            --background: #fff8f7;
-            --surface: #fff8f7;
-            --primary-container: #ffdad6;
-        }
-
-        :root.dark {
-            --surface-container-lowest: #0e0e0e;
-            --inverse-primary: #ba1a20;
-            --on-primary: #680008;
-            --on-secondary: #303030;
-            --surface-container-highest: #353534;
-            --on-surface-variant: #e4beba;
-            --inverse-surface: #e5e2e1;
-            --surface-container-low: #1c1b1b;
-            --surface-bright: #393939;
-            --secondary-container: #474746;
-            --on-error-container: #ffdad6;
-            --on-error: #690005;
-            --on-background: #e5e2e1;
-            --on-primary-container: #fff2f0;
-            --surface-variant: #353534;
-            --surface-container-high: #2a2a2a;
-            --primary: #ffb3ac;
-            --surface-container: #201f1f;
-            --error-container: #93000a;
-            --on-secondary-container: #b7b5b4;
-            --secondary: #c8c6c5;
-            --surface-dim: #131313;
-            --error: #ffb4ab;
-            --outline: #ab8985;
-            --outline-variant: #5b403d;
-            --on-surface: #e5e2e1;
-            --inverse-on-surface: #313030;
-            --background: #131313;
-            --surface: #131313;
-            --primary-container: #d32f2f;
-        }
-
+<style>
         body {
-            background-color: var(--background);
-            color: var(--on-surface);
+            background-color: #121212;
+            color: #e5e2e1;
             font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: var(--background); }
-        ::-webkit-scrollbar-thumb { background: var(--surface-container-highest); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
-        
-        .zebra-table tr:nth-child(even) { background-color: var(--surface-container-low); }
-        .zebra-table tr:nth-child(odd) { background-color: var(--surface-container); }
+        .chart-container {
+            background: linear-gradient(145deg, #1e1e1e, #161616);
+            border: 1px solid #2c2c2c;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2c2c2c;
+            border-radius: 10px;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white; color: black; }
+            .chart-container { border: 1px solid #eee; background: white; }
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface custom-scrollbar">
@@ -203,10 +149,6 @@
 <span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
 <span class="font-label-md">ITR Clients</span>
 </a>
-<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors transition-all duration-200" href="payments.html">
-<span class="material-symbols-outlined" data-icon="payments">payments</span>
-<span class="font-label-md">Payment List</span>
-</a>
 <a class="flex items-center gap-md px-md py-sm bg-surface-variant text-on-surface font-bold transition-all duration-200" href="reports.html">
 <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
 <span class="font-label-md">Reports</span>
@@ -215,9 +157,9 @@
 </nav>
 
 <div class="px-md mt-auto pt-lg border-t border-outline-variant flex items-center gap-md mb-md">
-    <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-on-primary font-bold text-lg logged-in-user-initials">...</div>
+    <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-on-primary font-bold text-lg logged-in-user-initials">JD</div>
     <div>
-        <p class="font-label-md font-bold text-on-surface logged-in-user-name">Loading...</p>
+        <p class="font-label-md font-bold text-on-surface logged-in-user-name">John Doe</p>
         <p class="text-[10px] text-on-surface-variant">Lead Tax Agent</p>
     </div>
 </div>
@@ -279,35 +221,35 @@
 <section class="grid grid-cols-12 gap-lg mb-xl">
 <!-- KPIs -->
 <div class="col-span-12 lg:col-span-4 grid grid-rows-3 gap-lg">
-<div class="bg-surface-container border border-outline-variant shadow-2xl p-lg rounded-xl flex flex-col justify-between">
+<div class="chart-container p-lg rounded-xl flex flex-col justify-between">
 <div>
 <p class="font-label-md text-on-surface-variant uppercase tracking-tighter">Total Filings (MTD)</p>
-<h4 id="report-total-filings" class="font-display text-display text-primary">...</h4>
+<h4 class="font-display text-display text-primary">1,248</h4>
 </div>
 <div class="flex items-center gap-xs text-[12px] font-bold text-error">
 <span class="material-symbols-outlined text-[14px]">trending_up</span>
                         +12.4% vs last month
                     </div>
 </div>
-<div class="bg-surface-container border border-outline-variant shadow-2xl p-lg rounded-xl flex flex-col justify-between">
+<div class="chart-container p-lg rounded-xl flex flex-col justify-between">
 <div>
 <p class="font-label-md text-on-surface-variant uppercase tracking-tighter">Compliance Rate</p>
-<h4 id="report-compliance-rate" class="font-display text-display text-on-surface">...</h4>
+<h4 class="font-display text-display text-on-surface">94.2%</h4>
 </div>
 <div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden mt-sm">
 <div class="bg-primary h-full" style="width: 94.2%"></div>
 </div>
 </div>
-<div class="bg-surface-container border border-outline-variant shadow-2xl p-lg rounded-xl flex flex-col justify-between">
+<div class="chart-container p-lg rounded-xl flex flex-col justify-between">
 <div>
 <p class="font-label-md text-on-surface-variant uppercase tracking-tighter">Pending Approvals</p>
-<h4 id="report-pending" class="font-display text-display text-on-surface">...</h4>
+<h4 class="font-display text-display text-on-surface">42</h4>
 </div>
-<p class="text-[12px] text-on-surface-variant italic">Next deadline: ...</p>
+<p class="text-[12px] text-on-surface-variant italic">Next deadline: April 15th</p>
 </div>
 </div>
 <!-- Bar Graph (Total Filings) -->
-<div class="col-span-12 lg:col-span-8 bg-surface-container border border-outline-variant shadow-2xl p-xl rounded-xl relative overflow-hidden">
+<div class="col-span-12 lg:col-span-8 chart-container p-xl rounded-xl relative overflow-hidden">
 <div class="flex justify-between items-center mb-xl relative z-10">
 <h5 class="font-headline-md text-on-surface">Total Filings per Month</h5>
 <div class="flex items-center gap-md">
@@ -360,55 +302,92 @@
 </section>
 <!-- Detailed View & Pie Chart -->
 <section class="grid grid-cols-12 gap-lg">
-<!-- Recent Registrations List -->
-<div class="col-span-12 lg:col-span-8 bg-surface-container border border-outline-variant shadow-2xl rounded-xl overflow-hidden">
+<!-- Recent Payments List -->
+<div class="col-span-12 lg:col-span-8 chart-container rounded-xl overflow-hidden">
 <div class="p-lg border-b border-outline-variant flex justify-between items-center">
-<h5 class="font-headline-md text-on-surface">Recent Registrations</h5>
-<button class="text-primary font-label-md hover:underline transition-all">View All Clients</button>
+<h5 class="font-headline-md text-on-surface">Recent Payments</h5>
+<button class="text-primary font-label-md hover:underline transition-all">View All Ledger</button>
 </div>
 <div class="overflow-x-auto overflow-y-auto max-h-[65vh] scrollbar-thin scrollbar-thumb-surface-variant scrollbar-track-transparent">
 <table class="w-full text-left">
 <thead>
 <tr class="bg-surface-container-low">
 <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase">Client ID</th>
-<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase">Client Name</th>
-<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase">Service Type</th>
-<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase">Date Joined</th>
+<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase">Transaction ID</th>
+<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase">Amount</th>
+<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase">Date</th>
 <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase">Status</th>
 </tr>
 </thead>
-<tbody id="recent-registrations-tbody" class="divide-y divide-outline-variant"></tbody>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-variant transition-colors group">
+<td class="px-lg py-md font-label-md text-on-surface">#CLI-8829</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">TXN_9921004</td>
+<td class="px-lg py-md font-bold text-on-surface">₹4,250.00</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Mar 24, 2024</td>
+<td class="px-lg py-md">
+<span class="px-sm py-xs bg-primary/10 text-primary font-label-sm rounded uppercase">Received</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant transition-colors group">
+<td class="px-lg py-md font-label-md text-on-surface">#CLI-4122</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">TXN_9921005</td>
+<td class="px-lg py-md font-bold text-on-surface">₹12,800.00</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Mar 23, 2024</td>
+<td class="px-lg py-md">
+<span class="px-sm py-xs bg-surface-container-highest text-on-surface-variant font-label-sm rounded uppercase">Pending</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant transition-colors group">
+<td class="px-lg py-md font-label-md text-on-surface">#CLI-1093</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">TXN_9921006</td>
+<td class="px-lg py-md font-bold text-on-surface">₹1,500.00</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Mar 22, 2024</td>
+<td class="px-lg py-md">
+<span class="px-sm py-xs bg-primary/10 text-primary font-label-sm rounded uppercase">Received</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant transition-colors group">
+<td class="px-lg py-md font-label-md text-on-surface">#CLI-3390</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">TXN_9921007</td>
+<td class="px-lg py-md font-bold text-on-surface">₹8,440.00</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Mar 22, 2024</td>
+<td class="px-lg py-md">
+<span class="px-sm py-xs bg-primary/10 text-primary font-label-sm rounded uppercase">Received</span>
+</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-<!-- Pie Chart (Service Distribution) -->
-<div class="col-span-12 lg:col-span-4 bg-surface-container border border-outline-variant shadow-2xl p-xl rounded-xl flex flex-col items-center">
-<h5 class="font-headline-md text-on-surface w-full mb-xl">Service Distribution</h5>
+<!-- Pie Chart (Payment Status) -->
+<div class="col-span-12 lg:col-span-4 chart-container p-xl rounded-xl flex flex-col items-center">
+<h5 class="font-headline-md text-on-surface w-full mb-xl">Payment Status</h5>
 <div class="relative w-48 h-48 mb-xl">
 <!-- SVG Pie Chart -->
 <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
 <circle cx="50" cy="50" fill="transparent" r="40" stroke="#353534" stroke-width="20"></circle>
-<circle id="report-pie-circle" cx="50" cy="50" fill="transparent" r="40" stroke="#d32f2f" stroke-dasharray="0 251.2" stroke-width="20" class="transition-all duration-1000"></circle>
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#d32f2f" stroke-dasharray="200 251.2" stroke-width="20"></circle>
 </svg>
 <div class="absolute inset-0 flex flex-col items-center justify-center">
-<span id="report-total-clients-pie" class="font-display text-headline-lg">...</span>
-<span class="text-[10px] uppercase text-on-surface-variant">Total Clients</span>
+<span class="font-display text-headline-lg">78%</span>
+<span class="text-[10px] uppercase text-on-surface-variant">Settled</span>
 </div>
 </div>
 <div class="w-full space-y-md">
 <div class="flex justify-between items-center">
 <div class="flex items-center gap-sm">
 <span class="w-3 h-3 bg-primary rounded-sm"></span>
-<span class="font-label-md text-on-surface-variant">GST Clients</span>
+<span class="font-label-md text-on-surface-variant">Received</span>
 </div>
-<span id="report-gst-count" class="font-bold text-on-surface">...</span>
+<span class="font-bold text-on-surface">₹142,500</span>
 </div>
 <div class="flex justify-between items-center">
 <div class="flex items-center gap-sm">
 <span class="w-3 h-3 bg-surface-container-highest rounded-sm"></span>
-<span class="font-label-md text-on-surface-variant">ITR Clients</span>
+<span class="font-label-md text-on-surface-variant">Pending</span>
 </div>
-<span id="report-itr-count" class="font-bold text-on-surface">...</span>
+<span class="font-bold text-on-surface">₹38,200</span>
 </div>
 </div>
 </div>
@@ -437,7 +416,7 @@
 <div class="flex justify-between items-end border-b-2 border-black pb-5 mb-10">
 <div>
 <h1 class="text-3xl font-bold uppercase">Financial Compliance Report</h1>
-<p id="report-print-date" class="text-gray-600">Generated on: ...</p>
+<p class="text-gray-600">Generated on: March 25, 2024</p>
 </div>
 <div class="text-right">
 <h2 class="text-xl font-bold">TaxFlow</h2>
@@ -448,9 +427,9 @@
 <div class="grid grid-cols-2 gap-10">
 <div class="border p-5">
 <h3 class="font-bold border-b mb-2">KPI Summary</h3>
-<p id="report-print-total" class="">Total Filings: ...</p>
-<p id="report-print-success" class="">Success Rate: ...</p>
-<p id="report-print-pending" class="">Pending: ...</p>
+<p class="">Total Filings: 1,248</p>
+<p class="">Success Rate: 94.2%</p>
+<p class="">Pending: 42</p>
 </div>
 <div class="border p-5">
 <h3 class="font-bold border-b mb-2">Revenue Status</h3>
@@ -479,5 +458,4 @@
     </script>
 
 
-<script type="module" src="/app.js"></script>
 </body></html>
