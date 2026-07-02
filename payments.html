@@ -1,12 +1,4 @@
-<!DOCTYPE html><html class="dark" lang="en"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>TaxFlow | GST &amp; ITR Management</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
+<!DOCTYPE html><html lang="en" class="dark" style=""><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
@@ -182,16 +174,16 @@
         .zebra-table tr:nth-child(even) { background-color: var(--surface-container-low); }
         .zebra-table tr:nth-child(odd) { background-color: var(--surface-container); }
     </style>
-</head>
-<body class="bg-background text-on-surface custom-scrollbar">
-<!-- SIDE NAVIGATION BAR -->
-<aside class="w-[260px] h-screen fixed left-0 top-0 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant flex flex-col py-lg z-50">
+</head><body class="bg-background text-on-surface custom-scrollbar">
+
+    <!-- Side Navigation Bar -->
+    <aside class="w-[260px] h-screen fixed left-0 top-0 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant flex flex-col py-lg z-50">
 <div class="px-xl mb-xl">
 <h1 class="font-display text-headline-lg font-bold text-primary dark:text-primary">TaxFlow</h1>
 <p class="font-body-md text-body-md text-on-surface-variant opacity-70">GST &amp; ITR Management</p>
 </div>
 <nav class="flex-1 flex flex-col gap-base">
-<a class="flex items-center gap-md px-md py-sm bg-surface-variant text-on-surface font-bold transition-all duration-200" href="index.html">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors transition-all duration-200" href="index.html">
 <span class="material-symbols-outlined" data-icon="group">group</span>
 <span class="font-label-md">Total Clients</span>
 </a>
@@ -203,7 +195,7 @@
 <span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
 <span class="font-label-md">ITR Clients</span>
 </a>
-<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors transition-all duration-200" href="payments.html">
+<a class="flex items-center gap-md px-md py-sm bg-surface-variant text-on-surface font-bold transition-all duration-200" href="payments.html">
 <span class="material-symbols-outlined" data-icon="payments">payments</span>
 <span class="font-label-md">Payment List</span>
 </a>
@@ -222,10 +214,9 @@
     </div>
 </div>
 </aside>
-<!-- Main Content Wrapper -->
 
-<!-- Top App Bar -->
-<header class="flex justify-between items-center h-16 px-xl w-[calc(100%-260px)] ml-[260px] bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant sticky top-0 z-40">
+    <!-- Top App Bar -->
+    <header class="flex justify-between items-center h-16 px-xl w-[calc(100%-260px)] ml-[260px] bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant sticky top-0 z-40">
 
 <div class="flex items-center gap-xl flex-grow">
     <h2 class="font-display text-headline-md font-black text-primary dark:text-primary whitespace-nowrap">TaxFlow Dashboard</h2>
@@ -250,152 +241,73 @@
 </div>
 
 </header>
-<!-- Main Canvas -->
-<main class="ml-[260px] p-xl mb-16">
-<!-- Due Date Alert Banner -->
-<div class="bg-primary-container text-on-primary-container p-md flex items-center justify-between shadow-lg animate-pulse mb-xl" style="animation-duration: 3s">
-<div class="flex items-center gap-md">
-<span class="material-symbols-outlined text-headline-md" data-icon="warning" style="font-variation-settings: 'FILL' 1">warning</span>
-<div>
-<h4 class="font-bold font-label-md">URGENT FILING DEADLINE</h4>
-<p class="font-body-md">GST Monthly Return (GSTR) is due in <span id="alert-days-left" class="underline font-black">...</span>. <span id="alert-pending-clients">...</span> clients pending.</p>
+
+    <!-- Main Content Canvas -->
+    <main class="ml-[260px] p-xl mb-16">
+<!-- Dashboard Header & Summary Stats -->
+<div class="flex justify-between items-end mb-xl">
+    <div>
+        <h3 class="font-display text-display text-on-surface mb-xs">Payment List</h3>
+        <div class="flex items-center gap-lg">
+            <div class="flex items-center gap-xs">
+                <span id="page-active-clients" class="text-primary font-bold font-display text-headline-md">...</span>
+                <span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Active Clients</span>
+            </div>
+            <div class="w-[1px] h-6 bg-outline-variant"></div>
+            <div class="flex items-center gap-xs">
+                <span id="page-pending-filings" class="text-error font-bold font-display text-headline-md">...</span>
+                <span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Pending Filings</span>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- Bento Grid Stats (Subtle) -->
+<div class="grid grid-cols-12 gap-gutter mb-xl">
+    <div class="col-span-4 bg-surface-container border border-outline-variant p-md rounded-xl hover:border-primary transition-colors">
+        <p class="text-on-surface-variant font-label-md mb-base">Total Expected Revenue</p>
+        <h4 id="page-expected-revenue" class="text-headline-md font-display">...</h4>
+    </div>
+    <div class="col-span-4 bg-surface-container border border-outline-variant p-md rounded-xl hover:border-primary transition-colors">
+        <p class="text-on-surface-variant font-label-md mb-base">Total Collected</p>
+        <h4 id="page-collected-revenue" class="text-headline-md font-display text-primary">...</h4>
+    </div>
+    <div class="col-span-4 bg-surface-container border border-outline-variant p-md rounded-xl hover:border-primary transition-colors">
+        <p class="text-on-surface-variant font-label-md mb-base">Total Pending</p>
+        <h4 id="page-pending-revenue" class="text-headline-md font-display text-error">...</h4>
+    </div>
 </div>
 </div>
-<button class="border border-white/30 px-lg py-xs font-bold text-label-sm uppercase hover:bg-white/10 transition-colors">
-                    View Pending
-                </button>
-</div>
-<!-- Hero Section: KPI Cards -->
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg mb-xl">
-<!-- Total Clients -->
-<div class="bg-surface-container border border-outline-variant p-lg relative overflow-hidden rounded-xl group hover:border-primary/50 transition-colors" style="transform: translateY(0px); transition: transform 0.2s ease-out;">
-<div class="relative z-10">
-<p class="font-label-md text-on-surface-variant uppercase tracking-widest mb-base">Total Clients</p>
-<h3 id="kpi-total-clients" class="font-display text-display text-on-surface">...</h3>
-<div class="flex items-center gap-xs mt-sm text-emerald-400 font-bold text-label-sm">
-<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
-                            +12% from last month
-                        </div>
-</div>
-<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[100px] opacity-5 text-on-surface group-hover:text-primary transition-colors" data-icon="group">group</span>
-</div>
-<!-- Active GST -->
-<div class="bg-surface-container border border-outline-variant p-lg relative overflow-hidden rounded-xl group hover:border-primary/50 transition-colors">
-<div class="relative z-10">
-<p class="font-label-md text-on-surface-variant uppercase tracking-widest mb-base">Active GST Filings</p>
-<h3 id="kpi-active-gst" class="font-display text-display text-on-surface">...</h3>
-<div class="flex items-center gap-xs mt-sm text-primary font-bold text-label-sm">
-<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
-                            86 pending submission
-                        </div>
-</div>
-<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[100px] opacity-5 text-on-surface group-hover:text-primary transition-colors" data-icon="receipt_long">receipt_long</span>
-</div>
-<!-- Active ITR -->
-<div class="bg-surface-container border border-outline-variant p-lg relative overflow-hidden rounded-xl group hover:border-primary/50 transition-colors">
-<div class="relative z-10">
-<p class="font-label-md text-on-surface-variant uppercase tracking-widest mb-base">Active ITR Filings</p>
-<h3 id="kpi-active-itr" class="font-display text-display text-on-surface">...</h3>
-<div class="flex items-center gap-xs mt-sm text-on-surface-variant font-bold text-label-sm">
-<span class="material-symbols-outlined text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1">check_circle</span>
-                            92% completed
-                        </div>
-</div>
-<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[100px] opacity-5 text-on-surface group-hover:text-primary transition-colors" data-icon="account_balance_wallet">account_balance_wallet</span>
-</div>
-<!-- Pending Payments -->
-<div class="bg-surface-container border border-outline-variant p-lg relative overflow-hidden rounded-xl group hover:border-primary/50 transition-colors" style="transform: translateY(0px); transition: transform 0.2s ease-out;">
-<div class="relative z-10">
-<p class="font-label-md text-on-surface-variant uppercase tracking-widest mb-base">Pending Payments</p>
-<h3 id="kpi-pending-payments" class="font-display text-display text-primary">...</h3>
-<div class="flex items-center gap-xs mt-sm text-primary font-bold text-label-sm">
-<span class="material-symbols-outlined text-sm" data-icon="error" style="font-variation-settings: 'FILL' 1">error</span>
-                            14 overdue invoices
-                        </div>
-</div>
-<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[100px] opacity-5 text-on-surface group-hover:text-primary transition-colors" data-icon="payments">payments</span>
-</div>
-</section>
-<!-- Main Content: Quick Access Table -->
-<section class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden shadow-2xl mb-xl" style="transform: translateY(0px); transition: transform 0.2s ease-out;">
-<div class="px-lg py-md border-b border-outline-variant bg-surface-container-high flex justify-between items-center">
-<h2 class="font-display text-headline-md">Recent Client Activity</h2>
-<div class="flex gap-sm">
-<button class="inline-flex items-center gap-xs px-md py-xs rounded-lg border border-outline-variant text-label-md hover:bg-surface-variant transition-colors">
-<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
-                            Filter
-                        </button>
-<button class="bg-primary-container text-on-primary-container px-lg py-sm rounded-lg font-bold flex items-center gap-sm hover:brightness-110 active:scale-95 transition-all shadow-xl shadow-red-900/10">
-<span class="material-symbols-outlined text-sm" data-icon="person_add">person_add</span>
-<span class="uppercase tracking-tighter">Add Client</span>
-</button>
-</div>
-</div>
-<div class="overflow-x-auto overflow-y-auto max-h-[65vh] scrollbar-thin scrollbar-thumb-surface-variant scrollbar-track-transparent">
-<table class="w-full text-left zebra-table border-collapse">
-<thead>
-<tr class="text-label-sm uppercase tracking-widest text-on-surface-variant border-b border-outline-variant">
-<th class="px-lg py-md font-semibold">Client Name</th>
-<th class="px-lg py-md font-semibold">ID Number</th>
-<th class="px-lg py-md font-semibold">Type</th>
-<th class="px-lg py-md font-semibold">Last Action</th>
-<th class="px-lg py-md font-semibold">Status</th>
-<th class="px-lg py-md font-semibold text-right">Actions</th>
-</tr>
-</thead>
-<tbody class="text-body-md"></tbody>
-</table>
-</div>
-</section>
-<!-- Bottom Layout: Visual & Additional Info -->
-<section class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
-<div class="lg:col-span-2 bg-surface-container border border-outline-variant p-lg">
-<h3 class="font-display text-headline-md mb-lg">Revenue Overview</h3>
-<div class="h-64 relative">
-<!-- Simplified Sparkline Pattern -->
-<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 400 100">
-<path d="M0,80 Q50,20 100,60 T200,40 T300,70 T400,20" fill="none" stroke="#ffb3ac" stroke-width="3"></path>
-<path d="M0,80 Q50,20 100,60 T200,40 T300,70 T400,20 V100 H0 Z" fill="url(#grad1)" opacity="0.1"></path>
-<defs>
-<linearGradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
-<stop offset="0%" style="stop-color:#ffb3ac;stop-opacity:1"></stop>
-<stop offset="100%" style="stop-color:#ffb3ac;stop-opacity:0"></stop>
-</linearGradient>
-</defs>
-</svg>
-<div class="absolute bottom-0 left-0 right-0 flex justify-between px-md text-[10px] text-on-surface-variant uppercase font-bold">
-<span class="">Jan</span><span class="">Feb</span><span class="">Mar</span><span class="">Apr</span><span class="">May</span><span class="">Jun</span>
-</div>
-</div>
-</div>
-<div class="bg-surface-container border border-outline-variant p-lg flex flex-col" style="transform: translateY(0px); transition: transform 0.2s ease-out;">
-<h3 class="font-display text-headline-md mb-lg">System Status</h3>
-<div class="space-y-md flex-1">
-<div class="flex items-center justify-between p-sm border border-outline-variant rounded">
-<span class="text-label-md">GST Portal Sync</span>
-<span class="text-emerald-400 font-bold text-xs uppercase">Online</span>
-</div>
-<div class="flex items-center justify-between p-sm border border-outline-variant rounded">
-<span class="text-label-md">ITR E-filing API</span>
-<span class="text-emerald-400 font-bold text-xs uppercase">Online</span>
-</div>
-<div class="flex items-center justify-between p-sm border border-outline-variant rounded">
-<span class="text-label-md">SMS Gateway</span>
-<span class="text-emerald-400 font-bold text-xs uppercase">Online</span>
-</div>
-<div class="flex items-center justify-between p-sm border border-outline-variant rounded">
-<span class="text-label-md">Cloud Storage</span>
-<span class="text-primary font-bold text-xs uppercase">92% Full</span>
-</div>
-</div>
-<button class="mt-lg w-full py-sm border border-primary text-primary font-bold uppercase text-label-sm hover:bg-primary/5 transition-colors">
-                        Check Infrastructure
-                    </button>
-</div>
-</section>
-</main>
-<!-- Footer Shell -->
-<footer class="fixed bottom-0 right-0 w-[calc(100%-260px)] bg-surface-container-low border-t border-outline-variant flex justify-between items-center px-xl py-md z-40">
+
+<!-- Data Table Container -->
+<section class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden shadow-2xl">
+    <div class="p-md border-b border-outline-variant bg-surface-container-high flex justify-end items-center">
+        <button id="addPaymentBtn" class="bg-primary-container text-on-primary-container px-lg py-sm rounded-lg font-bold flex items-center gap-sm hover:brightness-110 active:scale-95 transition-all shadow-xl shadow-red-900/10">
+            <span class="material-symbols-outlined" data-icon="add">add</span>
+            Add New
+        </button>
+    </div>
+    <div class="overflow-x-auto overflow-y-auto max-h-[65vh] scrollbar-thin scrollbar-thumb-surface-variant scrollbar-track-transparent">
+<table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-surface-container-highest border-b border-outline-variant">
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">Client Name</th>
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">Service Type</th>
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">Amount</th>
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">Payment Status</th>
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant"></tbody>
+                </table>
+            </div>
+            
+            </div>
+        </div>
+
+        <!-- Footer Shell -->
+        <footer class="fixed bottom-0 right-0 w-[calc(100%-260px)] bg-surface-container-low border-t border-outline-variant flex justify-between items-center px-xl py-md z-40">
 <p class="font-label-md text-on-surface-variant">© 2024 TaxFlow Professional Services. All Rights Reserved.</p>
 <div class="flex gap-lg">
 <a class="inline-flex items-center gap-xs text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">
@@ -412,20 +324,10 @@
                 </a>
 </div>
 </footer>
-</div>
-<!-- Micro-interaction: Smooth hover effects on cards via script -->
-<script>
-        document.querySelectorAll('.bg-surface-container').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-2px)';
-                card.style.transition = 'transform 0.2s ease-out';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-            });
-        });
-    </script>
+    </section>
+</main>
 
-
-<script type="module" src="/app.js"></script>
+    <!-- Micro-interaction Script -->
+    <script class="">
+        // Simple search animation</script><script type="module" src="/app.js"></script>
 </body></html>

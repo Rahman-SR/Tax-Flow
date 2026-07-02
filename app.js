@@ -1,3 +1,23 @@
+
+const style = document.createElement('style');
+style.textContent = `
+  .overflow-y-auto::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .overflow-y-auto::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #4B4B4B; 
+    border-radius: 10px;
+  }
+  .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #d32f2f; 
+  }
+`;
+document.head.appendChild(style);
+
 import { supabase } from './supabaseClient.js';
 import html2pdf from 'html2pdf.js';
 
@@ -71,10 +91,31 @@ document.addEventListener('DOMContentLoaded', () => {
         // Enforce login wall
         if (!session) {
             authModal.classList.remove('hidden');
+            allClients = [];
+            if (tbody) tbody.innerHTML = `<tr><td colspan="10" class="text-center py-xl text-on-surface-variant font-body-md">Please login to view clients.</td></tr>`;
+            if (isDashboardPage || isPaymentsPage || isReportsPage) {
+                const kpiTotal = document.getElementById('kpi-total-clients');
+                if (kpiTotal) kpiTotal.textContent = '...';
+                const kpiGst = document.getElementById('kpi-active-gst');
+                if (kpiGst) kpiGst.textContent = '...';
+                const kpiItr = document.getElementById('kpi-active-itr');
+                if (kpiItr) kpiItr.textContent = '...';
+                const kpiPay = document.getElementById('kpi-pending-payments');
+                if (kpiPay) kpiPay.textContent = '...';
+            } else if (tableName) {
+                const kpiActive = document.getElementById('page-active-clients');
+                if (kpiActive) kpiActive.textContent = '...';
+                const kpiPending = document.getElementById('page-pending-filings');
+                if (kpiPending) kpiPending.textContent = '...';
+                const kpiOverdue = document.getElementById('page-overdue-clients');
+                if (kpiOverdue) kpiOverdue.textContent = '...';
+                const kpiFiled = document.getElementById('page-filed-clients');
+                if (kpiFiled) kpiFiled.textContent = '...';
+            }
         } else {
             authModal.classList.add('hidden');
-            // Fetch clients if on a data page and not already fetched
-            if ((tableName || isDashboardPage) && allClients.length === 0) fetchClients();
+            // Fetch clients if on a data page unconditionally
+            if (tableName || isDashboardPage || isPaymentsPage || isReportsPage) fetchClients();
             
             // Update User Profile UI
             if (session.user && session.user.email) {
@@ -161,6 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const advFilterDropdown = document.getElementById('advFilterDropdown');
 
     const isDashboardPage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.includes('#');
+    const isPaymentsPage = window.location.pathname.includes('payments.html');
+    const isReportsPage = window.location.pathname.includes('reports.html');
     const isGstPage = window.location.pathname.includes('gst.html');
     const isItrPage = window.location.pathname.includes('itr.html');
     const tableName = isGstPage ? 'gst_clients' : (isItrPage ? 'itr_clients' : null);
@@ -232,6 +275,46 @@ let currentPage = 1;
     </div>
     `;
     document.body.insertAdjacentHTML('beforeend', modalHTML);
+    document.body.insertAdjacentHTML('beforeend', `
+    <!-- Custom Payment Modal -->
+    <div id="paymentModal" class="fixed inset-0 bg-black/60 hidden z-50 flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-surface-container border border-outline-variant rounded-xl w-full max-w-lg p-xl shadow-2xl max-h-[90vh] overflow-y-auto">
+            <h2 id="paymentModalTitle" class="font-display text-headline-md text-on-surface mb-md">Add New Payment</h2>
+            <form id="paymentForm" class="grid grid-cols-1 gap-md">
+                <input type="hidden" id="payEditId" value="">
+                <input type="hidden" id="payEditTable" value="">
+                
+                <div>
+                    <label class="block font-label-sm text-on-surface-variant mb-xs uppercase tracking-wider">Client Name</label>
+                    <input type="text" id="payName" required class="w-full bg-surface-dim border border-outline-variant rounded-lg px-md py-2 text-on-surface focus:border-primary outline-none">
+                </div>
+                <div>
+                    <label class="block font-label-sm text-on-surface-variant mb-xs uppercase tracking-wider">Service Type</label>
+                    <select id="payType" class="w-full bg-surface-dim border border-outline-variant rounded-lg px-md py-2 text-on-surface focus:border-primary outline-none">
+                        <option value="gst_clients">GST Client</option>
+                        <option value="itr_clients">ITR Client</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-label-sm text-on-surface-variant mb-xs uppercase tracking-wider">Payment Amount (₹)</label>
+                    <input type="number" id="payAmount" required class="w-full bg-surface-dim border border-outline-variant rounded-lg px-md py-2 text-on-surface focus:border-primary outline-none">
+                </div>
+                <div>
+                    <label class="block font-label-sm text-on-surface-variant mb-xs uppercase tracking-wider">Payment Date</label>
+                    <input type="date" id="payDate" required class="w-full bg-surface-dim border border-outline-variant rounded-lg px-md py-2 text-on-surface focus:border-primary outline-none">
+                </div>
+                <div>
+                    <label class="block font-label-sm text-on-surface-variant mb-xs uppercase tracking-wider">Phone Number</label>
+                    <input type="text" id="payPhone" required class="w-full bg-surface-dim border border-outline-variant rounded-lg px-md py-2 text-on-surface focus:border-primary outline-none">
+                </div>
+                <div class="flex justify-end gap-sm mt-lg">
+                    <button type="button" id="closePaymentModalBtn" class="px-md py-2 font-label-md text-on-surface-variant hover:text-on-surface transition-colors">Cancel</button>
+                    <button type="submit" id="savePaymentBtn" class="bg-primary text-on-primary px-lg py-2 rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+`);
 
     // ----- 2.5 Settings Modal Logic -----
     const settingsModalHTML = `
@@ -294,13 +377,64 @@ let currentPage = 1;
     });
 
     
+    
+    const paymentForm = document.getElementById('paymentForm');
+    if (paymentForm) {
+        paymentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('savePaymentBtn');
+            btn.textContent = 'Saving...';
+            btn.disabled = true;
+
+            const editId = document.getElementById('payEditId').value;
+            const editTable = document.getElementById('payEditTable').value;
+            
+            const targetTable = editId ? editTable : document.getElementById('payType').value;
+            
+            const payload = {
+                client_name: document.getElementById('payName').value,
+                amount: document.getElementById('payAmount').value,
+                payment_date: document.getElementById('payDate').value,
+                mobile_number: document.getElementById('payPhone').value,
+                payment_status: 'Paid' // default to paid if adding from here, or rely on existing logic
+            };
+            
+            if (!editId) {
+                // If new, fill omitted mandatory fields with placeholders
+                payload.user_id = 'PAY_' + Date.now();
+                payload.password = 'PENDING';
+                payload.pan_card = 'PENDING';
+                payload.address = 'PENDING';
+            }
+
+            let error;
+            if (editId) {
+                const res = await supabase.from(targetTable).update(payload).eq('id', editId);
+                error = res.error;
+            } else {
+                const res = await supabase.from(targetTable).insert([payload]);
+                error = res.error;
+            }
+
+            if (error) {
+                alert('Error saving payment: ' + error.message);
+            } else {
+                document.getElementById('paymentModal').classList.add('hidden');
+                fetchClients();
+            }
+            
+            btn.textContent = 'Save';
+            btn.disabled = false;
+        });
+    }
+
     // ----- 3. Fetch Data from Supabase -----
     const fetchClients = async (searchTerm = '') => {
         if (!tbody || !currentSession) return;
         
         let finalData = [];
         
-        if (isDashboardPage) {
+        if (isDashboardPage || isPaymentsPage || isReportsPage) {
             let q1 = supabase.from('gst_clients').select('*');
             let q2 = supabase.from('itr_clients').select('*');
             
@@ -334,14 +468,180 @@ let currentPage = 1;
         }
 
         allClients = finalData;
-        if (isDashboardPage) {
+        if (isPaymentsPage) {
+            renderPaymentsTable(allClients);
+        } else if (isReportsPage) {
+            renderReportsAnalytics(allClients);
+        } else if (isDashboardPage) {
             renderDashboardTable(allClients);
+            const kpiTotal = document.getElementById('kpi-total-clients');
+            if (kpiTotal) kpiTotal.textContent = finalData.length.toLocaleString();
+            
+            const gstCount = finalData.filter(c => c._type === 'GST').length;
+            const kpiGst = document.getElementById('kpi-active-gst');
+            if (kpiGst) kpiGst.textContent = gstCount.toLocaleString();
+            
+            const itrCount = finalData.filter(c => c._type === 'ITR').length;
+            const kpiItr = document.getElementById('kpi-active-itr');
+            if (kpiItr) kpiItr.textContent = itrCount.toLocaleString();
+            
+            const kpiPay = document.getElementById('kpi-pending-payments');
+            if (kpiPay) kpiPay.textContent = '₹0';
+            
+            const alertDays = document.getElementById('alert-days-left');
+            if (alertDays) {
+                const now = new Date();
+                let targetDate = new Date(now.getFullYear(), now.getMonth(), 20);
+                if (now.getDate() > 20) targetDate = new Date(now.getFullYear(), now.getMonth() + 1, 20);
+                const diffDays = Math.ceil(Math.abs(targetDate - now) / (1000 * 60 * 60 * 24));
+                alertDays.textContent = diffDays + ' days';
+            }
+            const alertPending = document.getElementById('alert-pending-clients');
+            if (alertPending) alertPending.textContent = '0';
         } else {
             renderTable(allClients);
+            if (tableName) {
+                const kpiActive = document.getElementById('page-active-clients');
+                if (kpiActive) kpiActive.textContent = finalData.length.toLocaleString();
+                const kpiPending = document.getElementById('page-pending-filings');
+                if (kpiPending) kpiPending.textContent = '0';
+                const kpiOverdue = document.getElementById('page-overdue-clients');
+                if (kpiOverdue) kpiOverdue.textContent = '0 Clients';
+                const kpiFiled = document.getElementById('page-filed-clients');
+                if (kpiFiled) kpiFiled.textContent = finalData.length.toLocaleString() + ' Clients';
+                
+                const pageDate = document.getElementById('page-date');
+                if (pageDate) {
+                    const now = new Date();
+                    pageDate.textContent = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+                }
+            }
         }
     };
 
     
+    
+    const renderPaymentsTable = (clients) => {
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        
+        const expectedRevenue = clients.reduce((acc, c) => acc + (c.amount || 0), 0);
+        const collectedRevenue = clients.filter(c => c.payment_status === 'Paid').reduce((acc, c) => acc + (c.amount || 0), 0);
+        const pendingRevenue = clients.filter(c => c.payment_status !== 'Paid').reduce((acc, c) => acc + (c.amount || 0), 0);
+        
+        const kpiExpected = document.getElementById('page-expected-revenue');
+        if (kpiExpected) kpiExpected.textContent = '₹' + expectedRevenue.toLocaleString();
+        
+        const kpiCollected = document.getElementById('page-collected-revenue');
+        if (kpiCollected) kpiCollected.textContent = '₹' + collectedRevenue.toLocaleString();
+        
+        const kpiPending = document.getElementById('page-pending-revenue');
+        if (kpiPending) kpiPending.textContent = '₹' + pendingRevenue.toLocaleString();
+
+        if (clients.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center py-xl text-on-surface-variant">No clients found.</td></tr>';
+            return;
+        }
+
+        clients.forEach(c => {
+            const tr = document.createElement('tr');
+            tr.className = 'hover:bg-surface-variant/50 transition-colors group border-b border-outline-variant/30';
+            tr.innerHTML = `
+                <td class="px-lg py-md font-body-md font-bold text-on-surface">${c.client_name}</td>
+                <td class="px-lg py-md font-body-md text-on-surface-variant">${c._type}</td>
+                <td class="px-lg py-md font-body-md text-on-surface">₹${(c.amount || 0).toLocaleString()}</td>
+                <td class="px-lg py-md">
+                    <button class="toggle-payment-btn ${c.payment_status === 'Paid' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-error-container/20 text-error border-error/20'} px-sm py-[2px] rounded-full text-[10px] font-bold uppercase border cursor-pointer hover:opacity-80 transition-opacity" data-id="${c.id}" data-table="${c._table}" data-status="${c.payment_status || 'Unpaid'}">
+                        ${c.payment_status || 'Unpaid'}
+                    </button>
+                </td>
+                <td class="px-lg py-md text-right">
+                    <div class="flex items-center justify-end gap-sm">
+                        <button class="text-on-surface-variant hover:text-primary transition-colors action-edit-btn" data-id="${c.id}" data-table="${c._table}">
+                            <span class="material-symbols-outlined text-[18px]">edit</span>
+                        </button>
+                        <button class="text-on-surface-variant hover:text-error transition-colors action-delete-btn" data-id="${c.id}" data-table="${c._table}">
+                            <span class="material-symbols-outlined text-[18px]">delete</span>
+                        </button>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    };
+
+    const renderReportsAnalytics = (clients) => {
+        // 1. Calculate General KPIs
+        const totalClients = clients.length;
+        const totalPaid = clients.filter(c => c.payment_status === 'Paid').length;
+        const complianceRate = totalClients ? ((totalPaid / totalClients) * 100).toFixed(1) : 0;
+        
+        const kpiTotal = document.getElementById('report-total-filings');
+        if (kpiTotal) kpiTotal.textContent = totalClients.toLocaleString();
+        
+        const kpiCompliance = document.getElementById('report-compliance-rate');
+        if (kpiCompliance) kpiCompliance.textContent = complianceRate + '%';
+        
+        const kpiPendingClients = document.getElementById('report-pending');
+        if (kpiPendingClients) kpiPendingClients.textContent = (totalClients - totalPaid).toString();
+        
+        // 2. GST vs ITR Service Distribution
+        const totalGst = clients.filter(c => c._type === 'GST').length;
+        const totalItr = clients.filter(c => c._type === 'ITR').length;
+        
+        const kpiGst = document.getElementById('report-gst-count');
+        if (kpiGst) kpiGst.textContent = totalGst.toLocaleString();
+        
+        const kpiItr = document.getElementById('report-itr-count');
+        if (kpiItr) kpiItr.textContent = totalItr.toLocaleString();
+        
+        const pieCenter = document.getElementById('report-total-clients-pie');
+        if (pieCenter) pieCenter.textContent = totalClients.toLocaleString();
+        
+        const pieCircle = document.getElementById('report-pie-circle');
+        if (pieCircle) {
+            const circleLength = 251.2;
+            const gstDash = totalClients ? (totalGst / totalClients) * circleLength : 0;
+            pieCircle.setAttribute('stroke-dasharray', `${gstDash} ${circleLength}`);
+        }
+        
+        // 3. Recent Registrations Table
+        const recentTbody = document.getElementById('recent-registrations-tbody');
+        if (recentTbody) {
+            recentTbody.innerHTML = '';
+            
+            if (clients.length === 0) {
+                recentTbody.innerHTML = '<tr><td colspan="5" class="text-center py-xl text-on-surface-variant font-body-md">No recent registrations found.</td></tr>';
+                return;
+            }
+            
+            // Clients are already sorted by created_at desc in fetchClients
+            clients.forEach(client => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-surface-variant/50 transition-colors';
+                
+                const typeBadgeColor = client._type === 'GST' ? 'bg-primary-container text-on-primary-container' : 'bg-surface-variant text-on-surface';
+                const date = new Date(client.created_at).toLocaleDateString();
+                
+                tr.innerHTML = `
+                    <td class="px-lg py-md font-body-md font-mono text-on-surface-variant">${client.user_id}</td>
+                    <td class="px-lg py-md font-body-md font-bold text-on-surface">${client.client_name}</td>
+                    <td class="px-lg py-md">
+                        <span class="inline-block px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${typeBadgeColor}">${client._type}</span>
+                    </td>
+                    <td class="px-lg py-md font-body-sm text-on-surface-variant">${date}</td>
+                    <td class="px-lg py-md">
+                        <div class="flex items-center gap-1 text-primary">
+                            <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                            <span class="font-body-sm">Active</span>
+                        </div>
+                    </td>
+                `;
+                recentTbody.appendChild(tr);
+            });
+        }
+    };
+
     const renderDashboardTable = (clients) => {
         if (!tbody) return;
         tbody.innerHTML = '';
@@ -352,7 +652,7 @@ let currentPage = 1;
         }
 
         // Show max 10 recent
-        clients.slice(0, 10).forEach(client => {
+        clients.forEach(client => {
             const tr = document.createElement('tr');
             tr.className = 'hover:bg-surface-variant/50 transition-colors';
             tr.dataset.id = client.id;
@@ -532,6 +832,84 @@ let currentPage = 1;
         }
 
         
+        
+        const togglePaymentBtn = e.target.closest('.toggle-payment-btn');
+        if (togglePaymentBtn) {
+            const id = togglePaymentBtn.dataset.id;
+            const table = togglePaymentBtn.dataset.table;
+            const currentStatus = togglePaymentBtn.dataset.status;
+            const newStatus = currentStatus === 'Paid' ? 'Unpaid' : 'Paid';
+            
+            togglePaymentBtn.textContent = '...';
+            togglePaymentBtn.disabled = true;
+            
+            const { error } = await supabase.from(table).update({ payment_status: newStatus }).eq('id', id);
+            
+            if (!error) {
+                fetchClients(); // Refetch to update all KPIs and tables safely
+            } else {
+                alert('Failed to update: ' + error.message);
+                togglePaymentBtn.textContent = 'Toggle';
+                togglePaymentBtn.disabled = false;
+            }
+            return;
+        }
+
+        
+        // Open Add Payment Modal
+        if (e.target.closest('#addPaymentBtn')) {
+            document.getElementById('paymentModalTitle').textContent = 'Add New Payment';
+            document.getElementById('paymentForm').reset();
+            document.getElementById('payEditId').value = '';
+            document.getElementById('payEditTable').value = '';
+            // set default date
+            document.getElementById('payDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('paymentModal').classList.remove('hidden');
+            return;
+        }
+
+        // Close Payment Modal
+        if (e.target.closest('#closePaymentModalBtn') || (e.target.id === 'paymentModal')) {
+            document.getElementById('paymentModal').classList.add('hidden');
+            return;
+        }
+
+        // Edit Payment Action
+        const payEditBtn = e.target.closest('.action-edit-btn');
+        if (payEditBtn) {
+            const id = payEditBtn.dataset.id;
+            const table = payEditBtn.dataset.table;
+            const client = allClients.find(c => c.id == id && c._table === table);
+            if (client) {
+                document.getElementById('paymentModalTitle').textContent = 'Edit Payment';
+                document.getElementById('payEditId').value = client.id;
+                document.getElementById('payEditTable').value = table;
+                document.getElementById('payName').value = client.client_name;
+                document.getElementById('payType').value = table;
+                document.getElementById('payAmount').value = client.amount || 0;
+                document.getElementById('payDate').value = client.payment_date || new Date().toISOString().split('T')[0];
+                document.getElementById('payPhone').value = client.mobile_number || '';
+                document.getElementById('paymentModal').classList.remove('hidden');
+            }
+            return;
+        }
+
+        // Delete Payment Action
+        const payDeleteBtn = e.target.closest('.action-delete-btn');
+        if (payDeleteBtn) {
+            const id = payDeleteBtn.dataset.id;
+            const table = payDeleteBtn.dataset.table;
+            if (confirm('Are you sure you want to delete this record?')) {
+                const { error } = await supabase.from(table).delete().eq('id', id);
+                if (!error) {
+                    fetchClients();
+                } else {
+                    alert('Error deleting: ' + error.message);
+                }
+            }
+            return;
+        }
+
         // Dashboard Filter Button
         const filterBtn = e.target.closest('button');
         if (filterBtn && filterBtn.textContent.trim().includes('Filter') && isDashboardPage) {
@@ -633,7 +1011,7 @@ let currentPage = 1;
                 filteredClients = [...allClients];
             }
             
-            if (isDashboardPage) {
+            if (isDashboardPage || isPaymentsPage || isReportsPage) {
                 currentPage = 1;
                 renderDashboardTable(filteredClients);
             } else {
