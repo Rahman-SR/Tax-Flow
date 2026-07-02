@@ -1,0 +1,381 @@
+<!DOCTYPE html><html lang="en" class="dark" style=""><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-primary": "#ba1a20",
+                    "on-primary": "#680008",
+                    "on-secondary": "#303030",
+                    "surface-container-highest": "#353534",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-surface-variant": "#e4beba",
+                    "inverse-surface": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-primary-fixed-variant": "#930010",
+                    "tertiary-container": "#706f6f",
+                    "secondary-fixed": "#e5e2e1",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-bright": "#393939",
+                    "secondary-container": "#474746",
+                    "tertiary": "#c8c6c5",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-container": "#f6f3f3",
+                    "primary-fixed-dim": "#ffb3ac",
+                    "on-error": "#690005",
+                    "on-tertiary": "#303030",
+                    "on-background": "#e5e2e1",
+                    "on-primary-container": "#fff2f0",
+                    "surface-variant": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed": "#ffdad6",
+                    "primary": "#ffb3ac",
+                    "surface-container": "#201f1f",
+                    "error-container": "#93000a",
+                    "on-secondary-container": "#b7b5b4",
+                    "secondary": "#c8c6c5",
+                    "tertiary-fixed": "#e4e2e1",
+                    "surface-dim": "#131313",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed": "#410003",
+                    "surface-tint": "#ffb3ac",
+                    "outline": "#ab8985",
+                    "outline-variant": "#5b403d",
+                    "on-surface": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "on-secondary-fixed-variant": "#474746",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "background": "#131313",
+                    "surface": "#131313",
+                    "primary-container": "#d32f2f",
+                    "on-secondary-fixed": "#1b1b1c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xs": "8px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "md": "16px",
+                    "container-padding": "24px",
+                    "gutter": "16px",
+                    "base": "4px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "display": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    }catch(_e){}</script></head><body class="overflow-hidden">
+
+    <!-- Side Navigation Bar -->
+    <aside class="w-[260px] h-screen fixed left-0 top-0 bg-surface-container border-r border-outline-variant flex flex-col py-lg z-50">
+        <div class="px-md mb-xl">
+            <h1 class="font-display text-headline-lg font-bold text-primary">TaxFlow</h1>
+            <p class="font-body-md text-on-surface-variant">GST &amp; ITR Management</p>
+        </div>
+        
+        <nav class="flex-1 space-y-base">
+            <a href="index.html" class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors">
+                <span class="material-symbols-outlined" data-icon="group">group</span>
+                <span class="font-label-md">Total Clients</span>
+            </a>
+            <!-- ACTIVE TAB: GST Clients -->
+            <a href="gst.html" class="flex items-center gap-md px-md py-sm border-l-4 border-primary bg-secondary-container text-on-secondary-container font-bold">
+                <span class="material-symbols-outlined text-primary" data-icon="receipt_long">receipt_long</span>
+                <span class="font-label-md">GST Clients</span>
+            </a>
+            <a href="itr.html" class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors">
+                <span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+                <span class="font-label-md">ITR Clients</span>
+            </a>
+            <a href="reports.html" class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors">
+                <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                <span class="font-label-md">Reports</span>
+            </a>
+            <a href="#" class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors">
+                <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                <span class="font-label-md">Settings</span>
+            </a>
+        </nav>
+
+        <div class="px-md mt-auto pt-lg border-t border-outline-variant flex items-center gap-md">
+            <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">JD</div>
+            <div>
+                <p class="font-label-md font-bold text-on-surface">John Doe</p>
+                <p class="text-[10px] text-on-surface-variant">Lead Tax Agent</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Top App Bar -->
+    <header class="flex justify-between items-center h-16 px-xl w-[calc(100%-260px)] ml-[260px] bg-surface border-b border-outline-variant fixed top-0 z-40">
+        <div class="flex items-center gap-xl w-1/2">
+            <div class="relative w-full max-w-md">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-body-md" data-icon="search">search</span>
+                <input type="text" placeholder="Search by Client Name or PAN..." class="w-full bg-surface-dim border border-outline-variant rounded-lg pl-10 pr-4 py-2 font-body-md text-on-surface focus:border-primary outline-none transition-all">
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-lg">
+            <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors active:scale-95" data-icon="notifications">notifications</button>
+            <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors active:scale-95" data-icon="help">help</button>
+            <div class="h-6 w-[1px] bg-outline-variant mx-xs"></div>
+            <button class="font-label-sm text-on-surface-variant hover:text-primary transition-colors uppercase tracking-wider">Profile</button>
+            <button class="bg-primary-container text-on-primary-container px-md py-xs font-label-sm font-bold uppercase hover:opacity-90 transition-all active:scale-95">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Content Canvas -->
+    <main class="ml-[260px] mt-16 p-xl h-[calc(100vh-64px)] overflow-y-auto">
+        
+        <!-- Dashboard Header & CTA -->
+        <div class="flex justify-between items-end mb-lg">
+            <div>
+                <h2 class="font-display text-headline-lg text-on-surface">GST Client Management</h2>
+                <p class="font-body-md text-on-surface-variant mt-xs">Manage filings, credentials, and compliance for all registered GST clients.</p>
+            </div>
+            <button class="bg-primary-container text-on-primary-container px-lg py-sm font-label-md font-black uppercase flex items-center gap-xs hover:shadow-[0_0_20px_rgba(211,47,47,0.3)] transition-all active:scale-95">
+                <span class="material-symbols-outlined" data-icon="add">add</span>
+                Add New Client
+            </button>
+        </div>
+
+        <!-- Filters & Stats Row -->
+        <div class="grid grid-cols-12 gap-gutter mb-lg">
+            <div class="col-span-3 bg-surface-container-low border border-outline-variant p-md">
+                <p class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-xs">Active Clients</p>
+                <div class="flex items-baseline gap-sm">
+                    <span class="font-display text-display text-primary">128</span>
+                    <span class="font-label-sm text-green-400">+4 this month</span>
+                </div>
+            </div>
+            <div class="col-span-3 bg-surface-container-low border border-outline-variant p-md">
+                <p class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-xs">Pending Filings</p>
+                <div class="flex items-baseline gap-sm">
+                    <span class="font-display text-display text-on-surface">24</span>
+                    <span class="font-label-sm text-error">Deadline: 2 days</span>
+                </div>
+            </div>
+            <div class="col-span-6 bg-surface-container-low border border-outline-variant p-md flex items-center justify-between">
+                <div>
+                    <p class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-xs">Quick Filter</p>
+                    <div class="flex gap-xs">
+                        <button class="px-md py-1 rounded-full border border-primary bg-primary/10 text-primary font-label-md">All Clients</button>
+                        <button class="px-md py-1 rounded-full border border-outline-variant text-on-surface-variant font-label-md hover:border-on-surface transition-colors">Quarterly</button>
+                        <button class="px-md py-1 rounded-full border border-outline-variant text-on-surface-variant font-label-md hover:border-on-surface transition-colors">Monthly</button>
+                    </div>
+                </div>
+                <button class="flex items-center gap-xs text-on-surface-variant hover:text-on-surface transition-colors">
+                    <span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                    <span class="font-label-md">Advanced Filters</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Data Table Section -->
+        <div class="bg-surface-container border border-outline-variant overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-surface-container-highest border-b border-outline-variant">
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">Client Name</th>
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">User ID</th>
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">Password</th>
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">PAN Card</th><th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">ADDRESS</th>
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">Mobile Number</th><th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">Aadhar Number</th>
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+                            <th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant">
+                        <!-- Row 1 -->
+                        <tr class="hover:bg-surface-variant/50 transition-colors group">
+                            <td class="px-lg py-md">
+                                <div class="flex items-center gap-md">
+                                    <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container text-xs">AK</div>
+                                    <div>
+                                        <p class="font-body-md font-bold text-on-surface">Amit Kumar &amp; Sons</p>
+                                        <p class="text-[11px] text-on-surface-variant">Retail &amp; Wholesale</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-lg py-md font-body-md text-on-surface">GST_AMIT_2024</td>
+                            <td class="px-lg py-md">
+                                <div class="flex items-center gap-xs">
+                                    <span class="font-body-md text-on-surface-variant">••••••••</span>
+                                    <button class="material-symbols-outlined text-[16px] text-on-surface-variant hover:text-primary transition-colors" data-icon="visibility">visibility</button>
+                                </div>
+                            </td>
+                            <td class="px-lg py-md font-body-md font-mono text-on-surface">ABCDE1234F</td><td class="px-lg py-md"><input type="text" placeholder="Enter manual address..." class="w-full bg-surface-dim border border-outline-variant rounded-lg px-md py-1 font-body-md text-on-surface focus:border-primary outline-none transition-all text-xs"></td>
+                            <td class="px-lg py-md font-body-md text-on-surface">+91 98765 43210</td><td class="px-lg py-md font-body-md text-on-surface">4582 •••• 9921</td>
+                            <td class="px-lg py-md">
+                                <span class="bg-green-500/10 text-green-400 px-sm py-[2px] rounded-full text-[10px] font-bold uppercase border border-green-500/20">Compliant</span>
+                            </td>
+                            <td class="px-lg py-md text-right">
+                                <div class="flex justify-end gap-md opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="edit">edit</button>
+                                    <button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors" data-icon="delete">delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr class="hover:bg-surface-variant/50 transition-colors group">
+                            <td class="px-lg py-md">
+                                <div class="flex items-center gap-md">
+                                    <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container text-xs">PS</div>
+                                    <div class="">
+                                        <p class="font-body-md font-bold text-on-surface">Priya Sharma Enterprises</p>
+                                        <p class="text-[11px] text-on-surface-variant">Consultancy Services</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-lg py-md font-body-md text-on-surface">PRIYA_GST_LOGIN</td>
+                            <td class="px-lg py-md">
+                                <div class="flex items-center gap-xs">
+                                    <span class="font-body-md text-on-surface-variant">••••••••</span>
+                                    <button class="material-symbols-outlined text-[16px] text-on-surface-variant hover:text-primary transition-colors" data-icon="visibility">visibility</button>
+                                </div>
+                            </td>
+                            <td class="px-lg py-md font-body-md font-mono text-on-surface">FGHIJ5678K</td><td class="px-lg py-md"><input type="text" placeholder="Enter manual address..." class="w-full bg-surface-dim border border-outline-variant rounded-lg px-md py-1 font-body-md text-on-surface focus:border-primary outline-none transition-all text-xs"></td>
+                            <td class="px-lg py-md font-body-md text-on-surface">+91 91234 56789</td><td class="px-lg py-md font-body-md text-on-surface">1234 •••• 5678</td>
+                            <td class="px-lg py-md">
+                                <span class="bg-error-container/20 text-error px-sm py-[2px] rounded-full text-[10px] font-bold uppercase border border-error/20">Action Required</span>
+                            </td>
+                            <td class="px-lg py-md text-right">
+                                <div class="flex justify-end gap-md opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="edit">edit</button>
+                                    <button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors" data-icon="delete">delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr class="hover:bg-surface-variant/50 transition-colors group">
+                            <td class="px-lg py-md">
+                                <div class="flex items-center gap-md">
+                                    <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container text-xs">TL</div>
+                                    <div>
+                                        <p class="font-body-md font-bold text-on-surface">TechLogistics Pvt Ltd</p>
+                                        <p class="text-[11px] text-on-surface-variant">Transport &amp; Fleet</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-lg py-md font-body-md text-on-surface">TL_GST_ADMIN</td>
+                            <td class="px-lg py-md">
+                                <div class="flex items-center gap-xs">
+                                    <span class="font-body-md text-on-surface-variant">••••••••</span>
+                                    <button class="material-symbols-outlined text-[16px] text-on-surface-variant hover:text-primary transition-colors" data-icon="visibility">visibility</button>
+                                </div>
+                            </td>
+                            <td class="px-lg py-md font-body-md font-mono text-on-surface">KLMNO9012L</td><td class="px-lg py-md"><input type="text" placeholder="Enter manual address..." class="w-full bg-surface-dim border border-outline-variant rounded-lg px-md py-1 font-body-md text-on-surface focus:border-primary outline-none transition-all text-xs"></td>
+                            <td class="px-lg py-md font-body-md text-on-surface">+91 99887 76655</td><td class="px-lg py-md font-body-md text-on-surface">8877 •••• 4433</td>
+                            <td class="px-lg py-md">
+                                <span class="bg-primary/10 text-primary px-sm py-[2px] rounded-full text-[10px] font-bold uppercase border border-primary/20">Processing</span>
+                            </td>
+                            <td class="px-lg py-md text-right">
+                                <div class="flex justify-end gap-md opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="edit">edit</button>
+                                    <button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors" data-icon="delete">delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                         <!-- Row 4 -->
+                         <tr class="hover:bg-surface-variant/50 transition-colors group">
+                            <td class="px-lg py-md">
+                                <div class="flex items-center gap-md">
+                                    <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container text-xs">BM</div>
+                                    <div class="">
+                                        <p class="font-body-md font-bold text-on-surface">BakeMore Confectionary</p>
+                                        <p class="text-[11px] text-on-surface-variant">Food Industry</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-lg py-md font-body-md text-on-surface">BAKEMORE_99</td>
+                            <td class="px-lg py-md">
+                                <div class="flex items-center gap-xs">
+                                    <span class="font-body-md text-on-surface-variant">••••••••</span>
+                                    <button class="material-symbols-outlined text-[16px] text-on-surface-variant hover:text-primary transition-colors" data-icon="visibility">visibility</button>
+                                </div>
+                            </td>
+                            <td class="px-lg py-md font-body-md font-mono text-on-surface">PQRSU3456M</td><td class="px-lg py-md"><input type="text" placeholder="Enter manual address..." class="w-full bg-surface-dim border border-outline-variant rounded-lg px-md py-1 font-body-md text-on-surface focus:border-primary outline-none transition-all text-xs"></td>
+                            <td class="px-lg py-md font-body-md text-on-surface">+91 90000 11111</td><td class="px-lg py-md font-body-md text-on-surface">2299 •••• 1100</td>
+                            <td class="px-lg py-md">
+                                <span class="bg-green-500/10 text-green-400 px-sm py-[2px] rounded-full text-[10px] font-bold uppercase border border-green-500/20">Compliant</span>
+                            </td>
+                            <td class="px-lg py-md text-right">
+                                <div class="flex justify-end gap-md opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="edit">edit</button>
+                                    <button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors" data-icon="delete">delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Table Pagination/Footer -->
+            <div class="px-xl py-md border-t border-outline-variant flex items-center justify-between bg-surface-container-low">
+                <span class="font-label-md text-on-surface-variant">Showing 1 to 4 of 128 clients</span>
+                <div class="flex gap-xs">
+                    <button class="p-2 border border-outline-variant text-on-surface-variant hover:bg-surface-variant active:scale-95 transition-all">
+                        <span class="material-symbols-outlined text-[20px]" data-icon="chevron_left">chevron_left</span>
+                    </button>
+                    <button class="px-md border border-primary bg-primary/10 text-primary font-label-md">1</button>
+                    <button class="px-md border border-outline-variant text-on-surface-variant hover:bg-surface-variant font-label-md transition-all">2</button>
+                    <button class="px-md border border-outline-variant text-on-surface-variant hover:bg-surface-variant font-label-md transition-all">3</button>
+                    <button class="p-2 border border-outline-variant text-on-surface-variant hover:bg-surface-variant active:scale-95 transition-all">
+                        <span class="material-symbols-outlined text-[20px]" data-icon="chevron_right">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Shell -->
+        <footer class="fixed bottom-0 right-0 w-[calc(100%-260px)] bg-surface-container-low border-t border-outline-variant flex justify-between items-center px-xl py-md z-40">
+            <div class="flex items-center gap-md">
+                <span class="font-display text-label-md font-bold text-on-surface">TaxFlow</span>
+                <span class="text-on-surface-variant font-body-md text-xs">© 2024 TaxFlow Professional Services. All Rights Reserved.</span>
+            </div>
+            <div class="flex gap-lg">
+                <a href="#" class="inline-flex items-center gap-xs px-md py-xs rounded-lg text-on-surface-variant hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-[18px]" data-icon="print">print</span>
+                    <span class="font-label-md">Print Report</span>
+                </a>
+                <a href="#" class="inline-flex items-center gap-xs px-md py-xs rounded-lg text-on-surface-variant hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-[18px]" data-icon="picture_as_pdf">picture_as_pdf</span>
+                    <span class="font-label-md">Export PDF</span>
+                </a>
+                <div class="flex items-center gap-xs ml-md">
+                    <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <span class="font-label-md text-on-surface-variant">System Status</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Micro-interaction Script -->
+    <script class="">
+        // Simple search animation</script></body></html>

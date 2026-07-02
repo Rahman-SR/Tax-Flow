@@ -1,0 +1,487 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ITR Client Management | TaxAgent Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #e5e2e1;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2c2c2c;
+        }
+        .table-zebra tr:nth-child(even) {
+            background-color: #222222;
+        }
+        .table-zebra tr:nth-child(odd) {
+            background-color: #1e1e1e;
+        }
+        .glass-panel {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #2c2c2c;
+        }
+        input:focus {
+            outline: none;
+            border-color: #d32f2f !important;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#e5e2e1",
+                    "on-secondary-fixed-variant": "#474746",
+                    "tertiary": "#c8c6c5",
+                    "secondary": "#c8c6c5",
+                    "primary-fixed-dim": "#ffb3ac",
+                    "on-error-container": "#ffdad6",
+                    "primary-container": "#d32f2f",
+                    "tertiary-container": "#706f6f",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary": "#303030",
+                    "inverse-surface": "#e5e2e1",
+                    "on-secondary-fixed": "#1b1b1c",
+                    "on-secondary-container": "#b7b5b4",
+                    "outline": "#ab8985",
+                    "on-primary": "#680008",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-primary-fixed": "#410003",
+                    "surface-variant": "#353534",
+                    "surface-tint": "#ffb3ac",
+                    "surface-dim": "#131313",
+                    "secondary-fixed": "#e5e2e1",
+                    "error": "#ffb4ab",
+                    "on-error": "#690005",
+                    "primary-fixed": "#ffdad6",
+                    "tertiary-fixed": "#e4e2e1",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "primary": "#ffb3ac",
+                    "surface-container": "#201f1f",
+                    "background": "#131313",
+                    "surface-bright": "#393939",
+                    "on-primary-container": "#fff2f0",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "inverse-primary": "#ba1a20",
+                    "surface-container-highest": "#353534",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "inverse-on-surface": "#313030",
+                    "surface-container-high": "#2a2a2a",
+                    "surface": "#131313",
+                    "outline-variant": "#5b403d",
+                    "secondary-container": "#474746",
+                    "on-primary-fixed-variant": "#930010",
+                    "surface-container-low": "#1c1b1b",
+                    "on-tertiary": "#303030",
+                    "on-tertiary-container": "#f6f3f3",
+                    "on-surface-variant": "#e4beba",
+                    "on-background": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xs": "8px",
+                    "sm": "12px",
+                    "base": "4px",
+                    "md": "16px",
+                    "xl": "32px",
+                    "container-padding": "24px",
+                    "lg": "24px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface custom-scrollbar">
+<!-- SIDE NAVIGATION BAR -->
+<aside class="w-[260px] h-screen fixed left-0 top-0 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant flex flex-col py-lg z-50">
+<div class="px-xl mb-xl">
+<h1 class="font-display text-headline-lg font-bold text-primary dark:text-primary">TaxFlow</h1>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-70">GST &amp; ITR Management</p>
+</div>
+<nav class="flex-1 flex flex-col gap-base">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors transition-all duration-200" href="index.html">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-md">Total Clients</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors transition-all duration-200" href="gst.html">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-md">GST Clients</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm bg-surface-variant text-on-surface font-bold transition-all duration-200" href="itr.html">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-md">ITR Clients</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors transition-all duration-200" href="reports.html">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md">Reports</span>
+</a>
+
+</nav>
+
+<div class="px-md mt-auto pt-lg border-t border-outline-variant flex items-center gap-md mb-md">
+    <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-on-primary font-bold text-lg logged-in-user-initials">JD</div>
+    <div>
+        <p class="font-label-md font-bold text-on-surface logged-in-user-name">John Doe</p>
+        <p class="text-[10px] text-on-surface-variant">Lead Tax Agent</p>
+    </div>
+</div>
+</aside>
+<!-- TOP APP BAR -->
+<header class="flex justify-between items-center h-16 px-xl w-[calc(100%-260px)] ml-[260px] bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant sticky top-0 z-40">
+
+<div class="flex items-center gap-xl flex-grow">
+    <h2 class="font-display text-headline-md font-black text-primary dark:text-primary whitespace-nowrap">TaxFlow Dashboard</h2>
+    <div class="relative w-full max-w-md">
+        <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant opacity-50" data-icon="search">search</span>
+        <input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-xs pl-xl pr-md text-body-md font-body-md focus:border-primary transition-all outline-none" placeholder="Search client by PAN, Name or UID..." type="text">
+    </div>
+</div>
+<div class="flex items-center gap-lg">
+    <div class="flex items-center gap-md">
+        <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95" data-icon="settings">settings</button>
+        <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95" data-icon="notifications">notifications</button>
+        <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95" data-icon="help">help</button>
+    </div>
+    <div class="h-8 w-[1px] bg-outline-variant"></div>
+    <div class="flex items-center gap-md">
+        <span class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors">Profile</span>
+        <button class="bg-error text-on-error px-md py-1 rounded font-label-sm font-bold cursor-pointer active:scale-95 transition-transform flex items-center gap-1" data-auth-action="logout">
+            Logout <span class="material-symbols-outlined text-[14px]">logout</span>
+        </button>
+    </div>
+</div>
+
+</header>
+<!-- MAIN CONTENT CANVAS -->
+<main class="ml-[260px] p-xl mb-16">
+<!-- Dashboard Header & Summary Stats -->
+<div class="flex justify-between items-end mb-xl">
+<div>
+<h3 class="font-display text-display text-on-surface mb-xs">ITR Client Management</h3>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-xs">
+<span class="text-primary font-bold font-display text-headline-md">142</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Active Clients</span>
+</div>
+<div class="w-[1px] h-6 bg-outline-variant"></div>
+<div class="flex items-center gap-xs">
+<span class="text-error font-bold font-display text-headline-md">28</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Pending Filings</span>
+</div>
+</div>
+</div>
+<button class="bg-primary-container text-on-primary-container px-lg py-sm rounded-lg font-bold flex items-center gap-sm hover:brightness-110 active:scale-95 transition-all shadow-xl shadow-red-900/10">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+<span class="uppercase tracking-tighter">Add New ITR Client</span>
+</button>
+</div>
+<!-- Bento Grid Stats / Quick Filters (Subtle) -->
+<div class="grid grid-cols-12 gap-gutter mb-xl">
+<div class="col-span-3 bg-surface-container border border-outline-variant p-md rounded-xl hover:border-primary transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<span class="material-symbols-outlined text-primary" data-icon="pending_actions">pending_actions</span>
+<span class="text-error font-bold text-label-sm">-12%</span>
+</div>
+<p class="text-on-surface-variant font-label-md mb-base">Overdue AY 2024-25</p>
+<h4 class="text-headline-md font-display">12 Clients</h4>
+</div>
+<div class="col-span-3 bg-surface-container border border-outline-variant p-md rounded-xl hover:border-primary transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<span class="material-symbols-outlined text-primary" data-icon="task_alt">task_alt</span>
+<span class="text-primary font-bold text-label-sm">+45%</span>
+</div>
+<p class="text-on-surface-variant font-label-md mb-base">Filed This Week</p>
+<h4 class="text-headline-md font-display">34 Clients</h4>
+</div>
+<div class="col-span-6 bg-surface-container border border-outline-variant p-md rounded-xl flex items-center justify-between">
+<div>
+<p class="text-on-surface-variant font-label-md mb-base">Submission Deadline Progress</p>
+<h4 class="text-headline-md font-display">31 July 2024</h4>
+</div>
+<div class="w-1/2 bg-surface-container-highest h-2 rounded-full overflow-hidden relative">
+<div class="absolute top-0 left-0 h-full bg-primary w-2/3"></div>
+</div>
+</div>
+</div>
+<!-- Data Table Container -->
+<section class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden shadow-2xl">
+<div class="p-md border-b border-outline-variant bg-surface-container-high flex justify-between items-center">
+<div class="flex gap-md">
+<button class="font-label-sm text-label-sm bg-primary text-on-primary px-md py-xs rounded-full">All Clients</button>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface px-md py-xs">Individual</button>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface px-md py-xs">HUF</button>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface px-md py-xs">Company</button>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sort by:</span>
+<select class="bg-surface-container-lowest border-outline-variant rounded py-1 px-3 text-label-sm font-label-sm focus:ring-1 focus:ring-primary">
+<option>Name (A-Z)</option>
+<option>Status</option>
+<option>Filing Date</option>
+</select>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left table-zebra">
+<thead class="bg-surface-container-highest sticky top-0 z-10">
+<tr>
+<th class="px-md py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest border-b border-outline-variant">Client Name</th>
+<th class="px-md py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest border-b border-outline-variant">User ID</th>
+<th class="px-md py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest border-b border-outline-variant">Password</th>
+<th class="px-md py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest border-b border-outline-variant">PAN Card</th>
+<th class="px-md py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest border-b border-outline-variant">ADDRESS</th>
+<th class="px-md py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest border-b border-outline-variant">Mobile Number</th>
+<th class="px-md py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest border-b border-outline-variant">Aadhar Number</th>
+<th class="px-md py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest border-b border-outline-variant">Status</th>
+<th class="px-md py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest border-b border-outline-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-variant transition-colors">
+<td class="px-md py-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="text-primary font-bold font-label-md">RK</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">Rajesh Kumar</span>
+</div>
+</td>
+<td class="px-md py-md font-body-md text-on-surface-variant">rajesh_itr_24</td>
+<td class="px-md py-md font-body-md text-on-surface-variant tracking-tighter">••••••••••</td>
+<td class="px-md py-md font-body-md text-on-surface font-mono">ABCDE1234F</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-xs">
+<input class="bg-surface-container-lowest border border-outline-variant/50 rounded px-2 py-1 text-body-md font-body-md w-32 focus:border-primary" type="text" value="+91 98765 43210">
+<span class="material-symbols-outlined text-[16px] text-primary cursor-pointer" data-icon="edit">edit</span>
+</div>
+</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-xs">
+<input class="bg-surface-container-lowest border border-outline-variant/50 rounded px-2 py-1 text-body-md font-body-md w-48 truncate focus:border-primary" type="text" value="Flat 402, Skyline Residency, Mumbai">
+<span class="material-symbols-outlined text-[16px] text-primary cursor-pointer" data-icon="edit">edit</span>
+</div>
+</td>
+<td class="px-md py-md text-center">
+<button class="p-xs hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+<button class="p-xs hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-variant transition-colors">
+<td class="px-md py-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="text-primary font-bold font-label-md">SS</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">Sunita Sharma</span>
+</div>
+</td>
+<td class="px-md py-md font-body-md text-on-surface-variant">sunita_itr_24</td>
+<td class="px-md py-md font-body-md text-on-surface-variant tracking-tighter">••••••••••</td>
+<td class="px-md py-md font-body-md text-on-surface font-mono">BCDEF2345G</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-xs">
+<input class="bg-surface-container-lowest border border-outline-variant/50 rounded px-2 py-1 text-body-md font-body-md w-32 focus:border-primary" type="text" value="+91 87654 32109">
+<span class="material-symbols-outlined text-[16px] text-primary cursor-pointer" data-icon="edit">edit</span>
+</div>
+</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-xs">
+<input class="bg-surface-container-lowest border border-outline-variant/50 rounded px-2 py-1 text-body-md font-body-md w-48 truncate focus:border-primary" type="text" value="G-12, Sector 15, Gurgaon, HR">
+<span class="material-symbols-outlined text-[16px] text-primary cursor-pointer" data-icon="edit">edit</span>
+</div>
+</td>
+<td class="px-md py-md text-center">
+<button class="p-xs hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+<button class="p-xs hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-variant transition-colors">
+<td class="px-md py-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="text-primary font-bold font-label-md">AM</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">Amit Mehra</span>
+</div>
+</td>
+<td class="px-md py-md font-body-md text-on-surface-variant">amehra_24_itr</td>
+<td class="px-md py-md font-body-md text-on-surface-variant tracking-tighter">••••••••••</td>
+<td class="px-md py-md font-body-md text-on-surface font-mono">CDEFG3456H</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-xs">
+<input class="bg-surface-container-lowest border border-outline-variant/50 rounded px-2 py-1 text-body-md font-body-md w-32 focus:border-primary" type="text" value="+91 76543 21098">
+<span class="material-symbols-outlined text-[16px] text-primary cursor-pointer" data-icon="edit">edit</span>
+</div>
+</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-xs">
+<input class="bg-surface-container-lowest border border-outline-variant/50 rounded px-2 py-1 text-body-md font-body-md w-48 truncate focus:border-primary" type="text" value="34B, Park Street, Kolkata, WB">
+<span class="material-symbols-outlined text-[16px] text-primary cursor-pointer" data-icon="edit">edit</span>
+</div>
+</td>
+<td class="px-md py-md text-center">
+<button class="p-xs hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+<button class="p-xs hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-surface-variant transition-colors">
+<td class="px-md py-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="text-primary font-bold font-label-md">PV</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">Priya Verma</span>
+</div>
+</td>
+<td class="px-md py-md font-body-md text-on-surface-variant">pverma_itr_filing</td>
+<td class="px-md py-md font-body-md text-on-surface-variant tracking-tighter">••••••••••</td>
+<td class="px-md py-md font-body-md text-on-surface font-mono">DEFGH4567I</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-xs">
+<input class="bg-surface-container-lowest border border-outline-variant/50 rounded px-2 py-1 text-body-md font-body-md w-32 focus:border-primary" type="text" value="+91 65432 10987">
+<span class="material-symbols-outlined text-[16px] text-primary cursor-pointer" data-icon="edit">edit</span>
+</div>
+</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-xs">
+<input class="bg-surface-container-lowest border border-outline-variant/50 rounded px-2 py-1 text-body-md font-body-md w-48 truncate focus:border-primary" type="text" value="Villa 9, Green Meadows, Bengaluru">
+<span class="material-symbols-outlined text-[16px] text-primary cursor-pointer" data-icon="edit">edit</span>
+</div>
+</td>
+<td class="px-md py-md text-center">
+<button class="p-xs hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+<button class="p-xs hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination -->
+<div class="px-md py-sm bg-surface-container-high border-t border-outline-variant flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="paginationInfo">Showing 0 of 0 clients</span>
+<div class="flex gap-base" id="paginationControls">
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-variant transition-colors disabled:opacity-20" disabled="">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center bg-primary text-on-primary rounded font-bold font-label-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-variant transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-variant transition-colors">3</button>
+<span class="px-1 self-end">...</span>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-variant transition-colors">36</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="fixed bottom-0 right-0 w-[calc(100%-260px)] bg-surface-container-low border-t border-outline-variant flex justify-between items-center px-xl py-md z-40">
+<p class="font-label-md text-on-surface-variant">© 2024 TaxFlow Professional Services. All Rights Reserved.</p>
+<div class="flex gap-lg">
+<a class="inline-flex items-center gap-xs text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="print">print</span>
+                    Print Report
+                </a>
+<a class="inline-flex items-center gap-xs text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="picture_as_pdf">picture_as_pdf</span>
+                    Export PDF
+                </a>
+<a class="inline-flex items-center gap-xs text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="data_usage">data_usage</span>
+                    System Status
+                </a>
+</div>
+</footer>
+<script>
+        // Micro-interaction: Focus on input when clicking edit icon
+        document.querySelectorAll('.material-symbols-outlined[data-icon="edit"]').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input');
+                if (input) {
+                    input.focus();
+                    input.select();
+                }
+            });
+        });
+
+        // Simple table hover effect enhancement
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.boxShadow = "inset 4px 0 0 0 #d32f2f";
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.boxShadow = "none";
+            });
+        });
+    </script>
+
+
+<script type="module" src="/app.js"></script>
+</body></html>
